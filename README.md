@@ -197,7 +197,7 @@ Built using:
 
 
 # 🧪 **How the Pipeline Works**
-
+```
 1️⃣ User uploads any file
 2️⃣ System identifies the content inside it
 3️⃣ Extractors pull meaningful data
@@ -206,7 +206,7 @@ Built using:
 6️⃣ If changed → new version created
 7️⃣ Data stored in raw + normalized format
 8️⃣ Dashboard updates automatically
-
+```
 ---
 
 # 🚀 **Installation**
@@ -269,7 +269,7 @@ Pipeline statistics.
 
 # 🤝 **Contributors**
 ```
-AuraDevs • AuraVerse • 2025
+Team AuraDevs • AuraVerse • 2025
 Amartya Majumder
 Bhumi N Deshpande
 Akash Patel
