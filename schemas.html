@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SchemaFlow — Schemas</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="left"><a class="brand" href="index.html">SchemaFlow</a></div>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="schemas.html" class="active">Schemas</a>
+      <a href="records.html">Records</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="panel" style="max-width:1100px; margin:18px auto">
+      <h3>Schema Versions</h3>
+      <table id="schemasTable" class="list-table">
+        <thead>
+          <tr><th>Version</th><th>Fields</th><th>Created</th><th>Change</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="schemaDetail" style="margin-top:16px; display:none"></div>
+    </div>
+  </main>
+
+  <script src="schemas.js"></script>
+</body>
+</html>

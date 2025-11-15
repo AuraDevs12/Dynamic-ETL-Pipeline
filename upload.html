@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SchemaFlow — Upload</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="topbar">
+    <div class="left"><a class="brand" href="index.html">SchemaFlow</a></div>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="upload.html" class="active">Upload</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="schemas.html">Schemas</a>
+      <a href="records.html">Records</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="panel" style="max-width:760px; margin:24px auto">
+      <h3>Upload a file</h3>
+
+      <form id="uploadForm">
+
+        <!-- FILE INPUT -->
+        <label class="field-label">File</label>
+
+        <div class="file-upload-wrapper">
+          <label for="fileInput" class="file-upload-btn">Select File</label>
+          <span id="fileName" class="file-name">No file chosen</span>
+        </div>
+
+        <input id="fileInput" name="file" type="file" class="hidden-file-input" required />
+
+        <!-- METADATA INPUT -->
+        <label class="field-label">Optional metadata (JSON)</label>
+
+        <textarea 
+          id="meta" 
+          rows="4" 
+          placeholder='{"uploader":"you@example.com"}' 
+          style="width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:#eaf1f3">
+        </textarea>
+
+        <!-- SUBMIT + PROGRESS -->
+        <div style="margin-top:12px; display:flex; gap:12px; align-items:center">
+          <button id="submitBtn" class="card" type="submit" style="min-width:120px; cursor:pointer">Upload</button>
+
+          <div id="progressWrap" 
+            style="flex:1; min-width:120px; height:12px; background:rgba(255,255,255,0.03); border-radius:8px; overflow:hidden; display:none">
+            <div id="progressBar" 
+              style="height:100%; width:0%; background:linear-gradient(90deg,var(--accent),#00a88f)">
+            </div>
+          </div>
+        </div>
+
+        <p id="status" style="margin-top:12px; color:var(--muted)"></p>
+      </form>
+    </div>
+  </main>
+
+  <script src="upload.js"></script>
+</body>
+</html>

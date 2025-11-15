@@ -1,0 +1,157 @@
+/* dashboard.css - Dark themed to match index.html */
+
+:root{
+  --bg:#0c0c0c;
+  --card:#0f1113;
+  --muted:#bfbfbf;
+  --accent:#00d1b2;
+  --panel:#121416;
+  --glass: rgba(255,255,255,0.03);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #070708 0%, var(--bg) 100%);
+  color: #e9eef3;
+  min-height:100vh;
+}
+
+/* topbar (shared nav) */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 40px;
+  background: rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.brand{
+  font-weight:800;
+  font-size:20px;
+  color:white;
+  text-decoration:none;
+}
+.navlinks a{
+  margin-left:18px;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  transition: color .15s ease;
+}
+.navlinks a:hover{ color:white }
+.navlinks a.active{ color:var(--accent); font-weight:600; }
+
+/* layout container */
+.container{
+  padding:28px 48px;
+}
+
+/* metrics row */
+.metrics{
+  display:flex;
+  gap:18px;
+  margin-bottom:22px;
+  flex-wrap:wrap;
+}
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;
+  padding:20px;
+  min-width:200px;
+  flex:1;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+  border:1px solid rgba(255,255,255,0.03);
+}
+.card h4{ margin:0; color:var(--muted); font-weight:600; font-size:14px }
+.metric{
+  margin-top:12px;
+  font-size:28px;
+  font-weight:800;
+  color: #fff;
+}
+
+/* panels */
+.panels{
+  display:flex;
+  gap:22px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+.panel{
+  background:var(--panel);
+  border-radius:12px;
+  padding:16px;
+  min-width:360px;
+  flex:1;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.02);
+}
+.panel h3{ margin:0 0 10px 0; font-size:16px; color:var(--muted) }
+
+/* tables */
+.list-table { width:100%; border-collapse:collapse; }
+.list-table thead th{
+  text-align:left; font-size:12px; color:var(--muted); padding:10px 8px; border-bottom:1px solid rgba(255,255,255,0.02)
+}
+.list-table tbody td{ padding:10px 8px; border-bottom:1px solid rgba(255,255,255,0.02); color:#dfe7ea }
+.list-table tbody tr:hover{ background: rgba(255,255,255,0.02) }
+
+/* small link button */
+.btn-link{
+  font-size:13px; color:var(--accent); text-decoration:none; font-weight:600;
+}
+
+/* responsive */
+@media (max-width:900px){
+  .metrics{ flex-direction:column }
+  .panels{ flex-direction:column }
+  .topbar{ padding:14px 18px }
+  .container{ padding:18px }
+}
+
+
+/* === Custom File Upload UI === */
+
+.hidden-file-input {
+    display: none;
+}
+
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 10px 0 18px 0;
+}
+
+.file-upload-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 10px 22px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.file-upload-btn:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.file-name {
+    color: #b5b5b5;
+    font-size: 14px;
+    user-select: none;
+}
+
+.field-label {
+    display: block;
+    margin: 12px 0 6px 0;
+    color: var(--muted);
+}

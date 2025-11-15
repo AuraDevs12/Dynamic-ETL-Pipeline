@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SchemaFlow — Records</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="left"><a class="brand" href="index.html">SchemaFlow</a></div>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="schemas.html">Schemas</a>
+      <a href="records.html" class="active">Records</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="panel" style="max-width:1100px; margin:18px auto">
+      <h3>Search Normalized Records</h3>
+
+      <div style="display:flex; gap:12px; margin:8px 0 14px 0; flex-wrap:wrap">
+        <input id="q" placeholder="Search text..." style="flex:1; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit" />
+        <input id="schemaVersion" placeholder="Schema version (optional)" style="width:180px; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit" />
+        <input id="fileType" placeholder="File type (optional)" style="width:140px; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit" />
+        <button id="searchBtn" class="card" style="min-width:120px">Search</button>
+      </div>
+
+      <div id="results" style="margin-top:12px"></div>
+      <div id="pager" style="margin-top:12px; color:var(--muted)"></div>
+    </div>
+  </main>
+
+  <script src="records.js"></script>
+</body>
+</html>
