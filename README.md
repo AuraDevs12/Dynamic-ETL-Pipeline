@@ -68,7 +68,7 @@ Perfect for real-world messy data environments.
 
 ## **1️⃣ Accepts Any File Format**
 
-Your backend handles *content-based detection*, NOT extension-based:
+The backend handles *content-based detection*, NOT extension-based:
 
 * PDFs
 * CSVs
@@ -78,6 +78,8 @@ Your backend handles *content-based detection*, NOT extension-based:
 * DOCX
 * JSON
 * Even files that contain **multiple formats inside** (e.g., HTML + images + JSON)
+
+* The backend inspects the file’s actual content (MIME type, magic bytes, and patterns) to determine format, rather than relying on the filename or extension.
 
 ---
 
@@ -93,7 +95,6 @@ Each format uses a specialized extractor:
 * Mixed files → processed segment-by-segment
 
 All extracted into a **unified structured object**.
-
 ---
 
 ## **3️⃣ Dynamic Schema Inference**
@@ -116,7 +117,6 @@ Example inferred schema:
   "images_text": "array"
 }
 ```
-
 ---
 
 ## **4️⃣ Schema Drift Detection**
@@ -152,13 +152,13 @@ v3 → + ocr_results
 v4 → data type change in "amount"
 ```
 
-This enables full trackability and backward compatibility.
+This enables full trackability and partial backward compatibility.
 
 ---
 
 ## **6️⃣ Raw + Normalized Storage Layers**
 
-Your backend stores:
+The backend stores:
 
 ### ✔ **Raw Storage**
 
@@ -176,11 +176,9 @@ Current schema version and details.
 
 Every version ever created.
 
-This is how big companies handle unpredictable data.
-
 ---
 
-## **7️⃣ Optional Frontend Dashboard**
+## **7️⃣ Frontend Dashboard**
 
 Shows:
 
@@ -189,42 +187,16 @@ Shows:
 * File type distribution
 * Number of records
 * Extraction success/failure stats
+* Number of versions
+* Details
 
 Built using:
-**React + Tailwind + Recharts**
+**HTML5 + CSS + JavaScript**
 
 ---
 
-# ⚙️ **Backend Structure**
 
-```
-/backend
-   /extractors
-        pdf_extractor.js
-        csv_extractor.js
-        docx_extractor.js
-        html_extractor.js
-        image_ocr.js
-        text_parser.js
-   /schema
-        inferSchema.js
-        compareSchema.js
-        versionManager.js
-   /storage
-        rawStorage.js
-        normalizedStorage.js
-        schemaRegistry.js
-   /utils
-        detectContentType.js
-        mixedFileSplitter.js
-   app.js
-   config.js
-   package.json
-```
-
----
-
-# 🧪 **How the Pipeline Works (Simple English)**
+# 🧪 **How the Pipeline Works**
 
 1️⃣ User uploads any file
 2️⃣ System identifies the content inside it
@@ -286,21 +258,21 @@ Pipeline statistics.
 ---
 
 # 🏆 **Why This Project Stands Out**
-
+```
 ✔ Can handle any data thrown at it
 ✔ Fully automated schema evolution
 ✔ Complete version history
 ✔ Supports mixed-format files
 ✔ Pipeline mimics real-world enterprise ETL systems
-
+```
 ---
 
 # 🤝 **Contributors**
-
+```
 AuraDevs • AuraVerse • 2025
 Amartya Majumder
 Bhumi N Deshpande
 Akash Patel
-
+```
 ---
 
