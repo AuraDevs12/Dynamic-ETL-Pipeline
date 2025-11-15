@@ -246,6 +246,9 @@ Pipeline statistics.
 
 # 🧩 **Tech Stack**
 
+* **HTML5**
+* **CSS**
+* **JavaScript** 
 * **Node.js + Express** (backend server)
 * **Multer** (file uploads)
 * **pdf-parse** (PDF extraction)
