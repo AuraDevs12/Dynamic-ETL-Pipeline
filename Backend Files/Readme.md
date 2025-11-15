@@ -2,7 +2,8 @@
 
 This project accepts many file types (JSON, CSV, PDF, DOCX, TXT, HTML, XML, image via OCR), extracts text/JSON, stores raw payloads, dynamically infers schemas, normalizes records, and exposes simple APIs.
 
-##
+---
+```
 ┌─────────────────────────────┐
 │ 1. File Ingestion / Upload  │
 │ - CSV, JSON, PDF, DOCX,     │
@@ -66,6 +67,9 @@ This project accepts many file types (JSON, CSV, PDF, DOCX, TXT, HTML, XML, imag
 │ - Schema versions track data │
 │   structure over time        │
 └─────────────────────────────┘
+
+```
+---
 
 
 ## Requirements
