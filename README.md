@@ -3,7 +3,7 @@ AuraVerse Hackathon Project
 
 🧠 **Dynamic ETL Pipeline for Unstructured & Multi-Format Data**
 
-### 🚀 Auto-Schema Generation • Schema Versioning • Multi-Format Extraction • Dynamic Storage
+### 🚀 Auto-Schema Generation • Schema Versioning • Multi-Format Extraction • Dynamic Storage and parsing Multi Format Data
 
 ---
 
