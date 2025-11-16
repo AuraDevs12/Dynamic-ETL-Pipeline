@@ -1,187 +1,209 @@
-
----
-
-
-# 🎨 Dynamic ETL Frontend
-
-### AuraVerse Hackathon Project  
-**User Dashboard for File Ingestion, Extraction & Schema Evolution**
-
+# Dynamic ETL Backend (Node.js + Express + MongoDB)
 ---
 
 ## 📌 Overview
 
-The **Dynamic ETL Frontend** is a lightweight, responsive dashboard that interacts with the backend ETL engine. It provides a simple UI for uploading files, inspecting extracted content, and tracking schema evolution in real time.
+The backend is designed to handle messy, unpredictable, and evolving data by:
 
-The frontend allows users to:
+* Accepting **any file format** (PDF, CSV, DOCX, TXT, HTML, JSON, images, mixed-format files)
+* Extracting meaningful data intelligently
+* Generating schemas automatically
+* Creating **new schema versions** on structural changes
+* Storing both **raw and normalized data**
+* Tracking schema evolution internally
 
-- ✔ Upload ANY type of file (PDF, CSV, DOCX, TXT, images, JSON, HTML)  
-- ✔ View real-time extraction results  
-- ✔ Monitor schema versions & differences  
-- ✔ Track schema evolution over time  
-- ✔ Inspect raw & normalized records  
-- ✔ View analytics about processed data  
-
-Built entirely with **HTML, CSS, JavaScript**.
+It forms the **core ETL engine**, handling all extraction, transformation, and storage operations.
 
 ---
 
-# 🖥️ Features
+## 🏗️ Backend Architecture
 
-## 🌐 1️⃣ File Upload Interface
+```
+        ┌──────────────────┐
+        │  File Ingestion  │
+        └────────┬─────────┘
+                 ↓
+        ┌────────────────────────┐
+        │  Content Classifier    │
+        └────────┬──────────────┘
+                 ↓
+  ┌─────────────────────────────────┐
+  │   Multi-Format Extraction Layer │
+  └───────┬───────────────┬────────┘
+          ↓               ↓
+   PDF Extractor      CSV Extractor    DOCX Extractor   Image OCR   HTML/Text Parser
+          ↓               ↓                    ↓             ↓            ↓
+  ────────────────────────────── Extracted Unified Data ────────────────────────────────
 
-- Drag-and-drop or click-to-upload  
-- Supports all formats handled by backend  
-  (PDF, CSV, DOCX, JSON, HTML, TXT, Images via OCR)  
-- Shows:
-  - Upload progress  
-  - Extraction preview  
-  - Detected content type  
-  - Parsed text/rows  
-  - Normalized output  
-  - Schema version used  
-
----
-
-## 📊 2️⃣ Dashboard Analytics
-
-The dashboard fetches backend stats & visualizes:
-
-- Total uploaded files  
-- Raw records count  
-- Normalized records count  
-- Latest schema version  
-- All schema versions  
-- File format distribution  
-- Upload success/failure count  
-- Timestamp of latest ingestion  
-
-Frontend uses minimal vanilla JS + simple charts (optional).
-
----
-
-## 📑 3️⃣ Schema Viewer
-
-A clean viewer to understand how schema evolves.
-
-You can:
-
-- View the **latest schema**  
-- Explore **all previous versions**  
-- See **exact changes** in fields/types  
-- Expand nested fields  
-- Inspect schema metadata (timestamp, sample size)  
-
----
-
-## 🗂️ 4️⃣ Records Browser
-
-Browse through stored data:
-
-- **Raw** extracted data  
-- **Normalized** canonical data  
-- Schema version for each record  
-- Pagination for large results  
-- Clean UI to explore data quality  
-
----
-
-## 🚦 5️⃣ Error, Status & Toast Notifications
-
-Frontend shows:
-
-- Upload errors & API errors  
-- Extraction failures  
-- Schema drift detected  
-- Backend offline warnings  
-- Success toasts for processed files  
-
-UI stays clean & minimal.
-
----
-
-# 🔌 API Connections
-
-The frontend uses the following API routes from backend:
-
-| Feature              | API Endpoint               |
-|---------------------|----------------------------|
-| File Upload         | `POST /api/upload`         |
-| Latest Schema       | `GET /api/schema/latest`   |
-| All Schema Versions | `GET /api/schema/versions` |
-| Raw Records         | `GET /api/raw`             |
-| Normalized Records  | `GET /api/normalized`      |
-| Pipeline Stats      | `GET /api/stats`           |
-
-Communication uses **JavaScript fetch()** with JSON.
-
----
-
-# 🚀 Installation & Running the Project
-
-## 1️⃣ Clone the repository
-
-```sh
-git clone https://github.com/yourrepo/dynamic-etl.git
-cd frontend
-````
-
-## 2️⃣ Run a local static server
-
-```sh
-npx serve
+                 ↓
+        ┌────────────────────┐
+        │ Dynamic Schema Gen │
+        └────────┬───────────┘
+                 ↓
+        ┌────────────────────┐
+        │ Schema Drift Check │
+        └────────┬───────────┘
+                 ↓
+        ┌────────────────────┐
+        │ Schema Versioning  │
+        └────────┬───────────┘
+                 ↓
+     ┌────────────────────────────┐
+     │ Raw + Normalized Storage   │
+     └────────────────────────────┘
 ```
 
-Or simply open `index.html` in the browser.
+---
 
-## 3️⃣ Start the backend service
+## 🎯 Key Backend Features
 
-```sh
+### 1️⃣ Accepts Any File Format
+
+* Uses **content-based detection**, NOT extension-based
+* Supported formats:
+
+  * PDFs, CSVs, DOCX, TXT, HTML, JSON, Images
+  * Mixed-format files (e.g., HTML + images + JSON)
+* Detects format via MIME type, magic bytes, and content patterns
+
+---
+
+### 2️⃣ Multi-Layer Extraction
+
+* Specialized extractors per format:
+
+  * **PDF:** text + metadata
+  * **CSV:** rows + headers
+  * **DOCX:** paragraphs + tables
+  * **HTML:** cleaned text + tags
+  * **Images:** OCR text
+* Mixed files are processed segment-by-segment
+* Extracted data **merged into a unified JSON object**
+
+---
+
+### 3️⃣ Dynamic Schema Inference
+
+* Scans extracted JSON-like data
+* Detects fields, data types, optional vs required, nested structures
+* Handles inconsistent fields and type variations
+* Example inferred schema:
+
+```json
+{
+  "title": "string",
+  "amount": "float",
+  "timestamp": "datetime",
+  "images_text": "array"
+}
+```
+
+---
+
+### 4️⃣ Schema Drift Detection
+
+* Compares new schema to the latest stored version
+* Detects:
+
+  * Added or removed fields
+  * Data type changes
+  * Nested structure changes
+* Creates **new schema version** automatically when changes occur
+
+---
+
+### 5️⃣ Schema Version Control
+
+* Stores every schema version with:
+
+  * Version number
+  * Schema structure
+  * Timestamp
+  * Diff from previous version
+* Ensures **safe storage**, but **does not provide full backward query compatibility** yet
+* Example version history:
+
+```
+v1 → name, email  
+v2 → + html_text  
+v3 → + ocr_results  
+v4 → data type change in "amount"
+```
+
+---
+
+### 6️⃣ Raw + Normalized Storage
+
+* **Raw Storage:** exact uploaded content + extraction outputs
+* **Normalized Storage:** data cleaned and transformed according to inferred schema
+* **Schema Metadata:** current version details
+* **Schema History:** tracks schema versions internally
+
+---
+
+### 7️⃣ Error Handling & Fault Tolerance
+
+* Failed files logged for retries
+* Raw content stored for debugging
+* Extraction errors do **not block ingestion**
+
+---
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/yourrepo/dynamic-etl.git
 cd backend
 npm install
-node server.js
+node app.js
 ```
-
-Expected logs:
-
-```
-Server listening on 3000
-Connected to MongoDB
-```
-
-## 4️⃣ Open the frontend
-
-Visit:
-
-```
-http://localhost:3000
-```
-
-(or whichever port is used)
 
 ---
 
-# 🎯 Tech Stack
+## 📌 API Endpoints
 
-* **HTML5**
-* **CSS**
-* **JavaScript**
-* **Fetch API**
-* **Responsive Layout**
-
-Zero external frameworks → deploy anywhere.
+* **POST /upload** → Upload a file
+* **GET /schema/latest** → Get latest schema version
+* **GET /schema/versions** → Get internal schema history
+* **GET /records** → Fetch normalized stored records
+* **GET /stats** → Pipeline statistics
 
 ---
 
-# 🏆 Why This Frontend Stands Out
+## 🧩 Tech Stack (Backend Only)
 
-* ✔ Super clean UI
-* ✔ Zero dependencies
-* ✔ Works instantly — no build steps
-* ✔ Visualizes schema evolution clearly
-* ✔ Designed specifically for the Dynamic ETL backend
-* ✔ Great for demo, hackathon, data engineering showcase
+* **Node.js + Express** → backend server
+* **Multer** → file uploads
+* **pdf-parse** → PDF extraction
+* **PapaParse** → CSV parsing
+* **Tesseract.js** → OCR for images
+* **Mammoth** → DOCX extraction
+* **Cheerio** → HTML parsing
+* **MongoDB** → dynamic storage + versioning
 
 ---
 
-```
+## ⚡ Backend Limitations (Current)
+
+* ❌ No support for `.md` markdown
+* ❌ No fragment-level counts, offsets, or key-value metadata
+* ❌ Normalization is basic; mixed-type handling is limited
+* ❌ No DB compatibility metadata or suggested indexes
+* ❌ Schema migration / backward query support is partial
+* ❌ No LLM / natural language query interface
+* ❌ Minimal logging & security
+* ❌ No stress/performance tests for large/concurrent uploads
+
+---
+
+## 🏆 Why the Backend Stands Out
+
+* Handles any data format, including mixed files
+* Fully automated **dynamic schema generation**
+* Maintains **internal schema version history**
+* Stores **raw + normalized data** safely
+* Acts as the **core ETL engine** for evolving, unstructured datasets
+
+---
+
+
