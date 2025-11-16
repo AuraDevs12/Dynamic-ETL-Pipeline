@@ -13,7 +13,7 @@ Modern data sources (scrapers, logs, documents, user uploads) produce *messy and
 Traditional ETL pipelines break because they require **fixed schemas**, but real-world data **changes frequently**.
 
 This project solves that problem by building a **dynamic ETL pipeline** capable of:
-
+```
 ✔ Accepting *any file format* (PDF, CSV, DOCX, TXT, HTML, JSON, images, mixed-format files)
 ✔ Extracting data intelligently
 ✔ Generating schemas automatically
@@ -22,7 +22,7 @@ This project solves that problem by building a **dynamic ETL pipeline** capable 
 ✔ Tracking schema evolution over time
 
 Perfect for real-world messy data environments.
-
+```
 ---
 
 # 🏗️ **Architecture**
